@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: katainaka0503/grpc-pr-env-test-frontend:latest
+        image: tainaka0503/grpc-pr-env-test-backend:latest
         ports:
         - containerPort: 50052
