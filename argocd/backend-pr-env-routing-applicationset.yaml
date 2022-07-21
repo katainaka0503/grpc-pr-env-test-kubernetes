@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: backend-pr-env
+  name: backend-pr-env-routing
+  namespace: argocd
 spec:
   generators:
   - pullRequest:
@@ -10,7 +11,7 @@ spec:
         repo: grpc-pr-env-test-backend
   template:
     metadata:
-      name: backend
+      name: '{{branch}}-backend-routing'
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io

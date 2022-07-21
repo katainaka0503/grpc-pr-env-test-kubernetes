@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: frontend-pr-env
+  namespace: argocd
 spec:
   generators:
   - pullRequest:
@@ -10,7 +11,7 @@ spec:
         repo: grpc-pr-env-test-frontend
   template:
     metadata:
-      name: frontend
+      name: '{{branch}}-frontend'
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io
