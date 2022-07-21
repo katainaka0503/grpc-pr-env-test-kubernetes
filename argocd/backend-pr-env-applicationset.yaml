@@ -27,7 +27,7 @@ spec:
         path: manifests/backend/overlays/pr
         targetRevision: master
         kustomize:
-          namePrefix: {{branch}}-
+          namePrefix: '{{branch}}-'
       destination:
         server: "https://kubernetes.default.svc"
         namespace: default
