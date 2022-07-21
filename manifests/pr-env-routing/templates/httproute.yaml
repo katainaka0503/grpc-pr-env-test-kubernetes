@@ -6,7 +6,7 @@ spec:
   parentRefs:
     - kind: Mesh
       name: istio
-  hostnames: ["{{ .Value.app }}.default.svc.cluster.local"]
+  hostnames: ["{{ .Values.app }}.default.svc.cluster.local"]
   rules:
   - matches:
       - header:
@@ -14,5 +14,5 @@ spec:
             name: baggage
             value: ^(.*\s*;)?branch\s*=\s*{{ .Values.branch }}(\s*;.*)?$   
     backendRefs:
-      - name: {{ .Values.branch }}-{{ .Value.app }}
+      - name: {{ .Values.branch }}-{{ .Values.app }}
         port: 80
