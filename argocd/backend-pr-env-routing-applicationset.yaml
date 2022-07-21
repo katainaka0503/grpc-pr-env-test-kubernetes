@@ -24,7 +24,7 @@ spec:
           releaseName: backend-pr-routing
           parameters:
             - name: branch
-              value: {{ branch }}
+              value: '{{ branch }}'
             - name: app
               value: 
       destination:
