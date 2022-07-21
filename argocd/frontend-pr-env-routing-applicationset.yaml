@@ -21,7 +21,7 @@ spec:
         path: manifests/pr-env-routing
         targetRevision: master
         helm:
-          releaseName: frontend-pr-routing
+          releaseName: frontend-{{ branch }}-pr
           parameters:
             - name: branch
               value: '{{ branch }}'
