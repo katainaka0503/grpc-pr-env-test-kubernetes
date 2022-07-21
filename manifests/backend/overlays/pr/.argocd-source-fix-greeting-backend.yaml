@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - katainaka0503/grpc-pr-env-test-backend:fix-greeting-756e5a46ed6d29cd391c34cbdbe5a827f420fa19
