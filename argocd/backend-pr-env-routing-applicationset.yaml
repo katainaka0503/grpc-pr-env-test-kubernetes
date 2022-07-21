@@ -27,7 +27,7 @@ spec:
             - name: branch
               value: '{{ branch }}'
             - name: app
-              value: 
+              value: backend
       destination:
         server: "https://kubernetes.default.svc"
         namespace: default
