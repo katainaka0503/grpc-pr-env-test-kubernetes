@@ -1,0 +1,6 @@
+resources:
+  - backend-application.yaml
+  - backend-application-set.yaml
+  - frontend-application.yaml
+  - frontend-application-set.yaml
+  - pr-env-proxy-application.yaml

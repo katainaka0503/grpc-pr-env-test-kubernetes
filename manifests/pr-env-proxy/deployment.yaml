@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pr-env-proxy
+  labels:
+    app: pr-env-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pr-env-proxy
+  template:
+    metadata:
+      labels:
+        app: pr-env-proxy
+    spec:
+      containers:
+      - name: pr-env-proxy
+        image: katainaka0503/grpc-pr-env-test-pr-env-proxy:latest
+        ports:
+        - containerPort: 80

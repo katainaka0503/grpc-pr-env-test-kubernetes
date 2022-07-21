@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pr-env-proxy
+spec:
+  selector:
+    app: pr-env-proxy
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

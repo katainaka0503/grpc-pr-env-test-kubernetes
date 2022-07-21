@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: backend-pr-env
+spec:
+  generators:
+  - pullRequest:
+      github:
+        owner: katainaka0503
+        repo: grpc-pr-env-test-backend
+  template:
+    metadata:
+      name: backend
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/katainaka0503/grpc-pr-env-test-kubernetes.git
+        path: manifests/pr-env-routing
+        targetRevision: master
+        helm:
+          releaseName: backend-pr-routing
+          parameters:
+            - name: branch
+              value: {{ branch }}
+            - name: app
+              value: 
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
