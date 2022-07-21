@@ -1,6 +1,8 @@
 resources:
   - backend-application.yaml
+  - backend-pr-env-applicationset.yaml
   - backend-pr-env-routing-applicationset.yaml
   - frontend-application.yaml
+  - frontend-pr-env-applicationset.yaml
   - frontend-pr-env-routing-applicationset.yaml
   - pr-env-proxy-application.yaml

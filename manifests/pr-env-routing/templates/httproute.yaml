@@ -9,7 +9,7 @@ spec:
   hostnames: ["{{ .Values.app }}.default.svc.cluster.local"]
   rules:
   - matches:
-      - header:
+      - headers:
           - type: RegularExpression
             name: baggage
             value: ^(.*\s*;)?branch\s*=\s*{{ .Values.branch }}(\s*;.*)?$   
