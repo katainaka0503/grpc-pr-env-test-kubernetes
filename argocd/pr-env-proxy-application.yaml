@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/katainaka0503/grpc-pr-env-test-kubernetes.git
-    path: manifests/pr-env-proxy/overlays/staging
+    path: manifests/pr-env-proxy
     targetRevision: master
   destination:
     server: "https://kubernetes.default.svc"
