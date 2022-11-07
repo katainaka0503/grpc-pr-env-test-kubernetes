@@ -29,6 +29,8 @@ spec:
         targetRevision: master
         kustomize:
           namePrefix: '{{branch}}-'
+          commonLabels:
+            branch: '{{branch}}'
       destination:
         server: "https://kubernetes.default.svc"
         namespace: default

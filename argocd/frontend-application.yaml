@@ -17,6 +17,9 @@ spec:
     repoURL: https://github.com/katainaka0503/grpc-pr-env-test-kubernetes.git
     path: manifests/frontend/overlays/staging
     targetRevision: master
+    kustomize:
+      commonLabels:
+        branch: 'master'
   destination:
     server: "https://kubernetes.default.svc"
     namespace: default
