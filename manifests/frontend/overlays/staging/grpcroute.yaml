@@ -1,12 +1,14 @@
 apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: HTTPRoute
+kind: GRPCRoute
 metadata:
   name: frontend
 spec:
   parentRefs:
-    - kind: Mesh
-      name: istio
-  hostnames: ["frontend.default.svc.cluster.local"]
+    - name: eg
+  hostnames:
+    - "frontend-gateway.default.svc.cluster.local"
+    - "frontend-gateway.default"
+    - "frontend-gateway"
   rules:
     - backendRefs:
         - name: frontend

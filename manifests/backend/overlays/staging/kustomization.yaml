@@ -1,4 +1,5 @@
 bases:
   - ../../base
 resources:
-  - httproute.yaml
+  - grpcroute.yaml
+  - gateway-service.yaml

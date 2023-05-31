@@ -6,3 +6,4 @@ resources:
   - frontend-pr-env-applicationset.yaml
   - frontend-pr-env-routing-applicationset.yaml
   - pr-env-proxy-application.yaml
+  - gateway.yaml
