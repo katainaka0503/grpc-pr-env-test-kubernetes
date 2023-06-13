@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - katainaka0503/grpc-pr-env-test-backend:yo-katainaka-8e0050ef607c85fba30b34b5cb2d19f59e852ed6
+  - katainaka0503/grpc-pr-env-test-backend:yo-katainaka-1417b0282a8207c0a81fb787bdd3511394f73320
