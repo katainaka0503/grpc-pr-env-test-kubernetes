@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: GRPCRoute
+metadata:
+  name: "${ARGOCD_ENV_BRANCH_NAME}-${ARGOCD_ENV_APP_NAME}"
+spec:
+  parentRefs:
+    - name: eg
+  hostnames:
+    - "${ARGOCD_ENV_APP_NAME}-gateway.default.svc.cluster.local"
+    - "${ARGOCD_ENV_APP_NAME}-gateway.default"
+    - "${ARGOCD_ENV_APP_NAME}-gateway"
+  rules:
+  - matches:
+      - headers:
+          - type: Exact
+            name: ot-baggage-branch
+            value: "${ARGOCD_ENV_BRANCH_NAME}"
+    backendRefs:
+      - name: "${ARGOCD_ENV_BRANCH_NAME}-${ARGOCD_ENV_APP_NAME}"
+        port: 80

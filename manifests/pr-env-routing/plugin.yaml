@@ -1,0 +1,9 @@
+# https://kencharos.hatenablog.com/entry/2022/11/26/000902 を参考にした
+apiVersion: kustomize-krm/v1alpha1
+kind: Patch
+metadata:
+  annotations:
+    config.kubernetes.io/function: |
+      exec:
+        path: /home/argocd/scripts/patch.sh
+  name: preview_patch

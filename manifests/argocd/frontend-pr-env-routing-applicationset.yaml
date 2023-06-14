@@ -21,13 +21,12 @@ spec:
         repoURL: https://github.com/katainaka0503/grpc-pr-env-test-kubernetes.git
         path: manifests/pr-env-routing
         targetRevision: master
-        helm:
-          releaseName: frontend-{{ branch }}-pr
-          parameters:
-            - name: branch
-              value: '{{ branch }}'
-            - name: app
-              value: frontend
+        plugin:
+          env:
+            - name: APP_NAME
+              value: 'frontend'
+            - name: BRANCH_NAME
+              value: '{{branch}}'
       destination:
         server: "https://kubernetes.default.svc"
         namespace: default
