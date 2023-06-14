@@ -1,0 +1,20 @@
+# https://kencharos.hatenablog.com/entry/2022/11/26/000902 を参考にした
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cmp-plugin
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: kustomize-exec-plugin
+    spec:
+      version: v1.0
+      init:
+        command: ["sh", "-euxc", "echo", "plugin init for ${ARGOCD_APP_NAME} PR-${ARGOCD_ENV_PR_NUMBER}"]
+      generate:
+        command: ["kustomize","--enable-alpha-plugins", "--enable-exec", "build"]
+      discover:
+        find:
+          command: ["sh", "-c", "echo $ARGOCD_APP_SOURCE_PATH | grep pr-env"]

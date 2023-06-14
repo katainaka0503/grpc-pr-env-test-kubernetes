@@ -1,0 +1,7 @@
+bases:
+- https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+patchesStrategicMerge:
+- argocd-repo-server.yaml
+resources:
+- cmp-plugin-configmap.yaml
+- cmp-script-configmap.yaml

@@ -1,0 +1,52 @@
+# https://kencharos.hatenablog.com/entry/2022/11/26/000902 を参考にした
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      initContainers:
+      ## ConfigMapのスクリプト、 nginx image 内部の envsubst を /home/argocd/scripts/ にコピーして、 sidecar イメージで使えるようにする。
+      - name: envsubst
+        image: nginx:stable # this is relyable image that includes envsubst.
+        command: ["/bin/sh","-c", "cp /usr/bin/envsubst /home/argocd/scripts/envsubst && cp /home/argocd/scripts_temp/*.sh /home/argocd/scripts && chmod +x /home/argocd/scripts/*"]
+        volumeMounts:
+          - mountPath: /home/argocd/scripts
+            name: cmp-script-exe
+          - mountPath: /home/argocd/scripts_temp
+            name: cmp-script
+      containers:
+      # この辺りの書き方は https://argo-cd.readthedocs.io/en/stable/user-guide/config-management-plugins/#2-place-the-plugin-configuration-file-in-the-sidecar を参照。
+      - name: cmp
+        command: ["/var/run/argocd/argocd-cmp-server"] # Entrypoint should be Argo CD lightweight CMP server i.e. argocd-cmp-server
+        image: quay.io/argoproj/argocd:v2.5.2 # kustomize を使いたいので argocd イメージを使っている。
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 999
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          # Remove this volumeMount if you've chosen to bake the config file into the sidecar image.
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: plugin.yaml
+            name: cmp-plugin
+          # Starting with v2.4, do NOT mount the same tmp volume as the repo-server container. The filesystem separation helps
+          # mitigate path traversal attacks.
+          - mountPath: /tmp
+            name: cmp-tmp
+          - mountPath: /home/argocd/scripts
+            name: cmp-script-exe
+      volumes:
+        - configMap:
+            name: cmp-plugin
+          name: cmp-plugin
+        - emptyDir: {}
+          name: cmp-tmp
+        - emptyDir: {}
+          name: cmp-script-exe
+        - configMap:
+            name: cmp-script
+          name: cmp-script
